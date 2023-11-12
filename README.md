@@ -29,3 +29,12 @@
   ```shell
   touch .env
   ```
+
+# 1.0 LangChain 이해하기
+
+- LLMs vs. Chat Models
+  - Chat Models가 최적화되어 있어 비용이 저렴하므로 해당 모델을 사용한다
+  ```python
+  from langchain.llms import OpenAI # LLMs
+  from langchain.chat_models import ChatOpenAI # Chat Model
+  ```
