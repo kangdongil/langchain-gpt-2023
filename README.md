@@ -55,3 +55,30 @@ env/
 
 - `ms-python.python`
 - `ms-toolsai.jupyer`
+
+## 0.2 Understanding LangChain Usage
+
+### 1. Configure Chat Model
+
+```python
+from langchain.chat_models import ChatOpenAI
+
+# Create Chat Model instance
+chat = ChatOpenAI(
+    model_name="gpt-3.5-turbo",
+    temperature=0.1
+)
+```
+
+- `temperate`: Determines the randomness of the model's output (range: 0 to 1).
+
+### 2. Configure Prompt
+
+1. Simple Text Prompt
+
+```python
+prompt="How many planets are in the solar system?"
+
+response = chat.predict(prompt)
+print(response)
+```
