@@ -178,3 +178,26 @@ print(response)
 ```
 
 - Uses prompt template with a structured message format.
+
+### 3. Configure OuputParser
+
+1. OuputParser Basic Example
+
+```python
+from langchain.schema import BaseOutputParser
+
+# Define a custom output parser
+class CommaOutputParser(BaseOutputParser):
+
+    def parse(self, text):
+        items = text.strip().split(",")
+        return list(map(lambda x: x.strip().lower(), items))
+
+# Parse the content of the result
+p = CommaOutputParser()
+p.parse(result.content)
+```
+
+- `BaseOutputParser` is just an empty class with a parse method.
+- Place own parsing logic in the `parse` method
+- Ensure to convert the `ChatResult` instance into a string using the `.content` attribute before passing it to the `parse` method.
