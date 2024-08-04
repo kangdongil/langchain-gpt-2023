@@ -58,15 +58,24 @@ env/
 
 ```python
 from langchain.chat_models import ChatOpenAI
+from langchain.callbacks import StreamingStdOutCallbackHandler
 
-# Create Chat Model instance
+# Initialize ChatOpenAI Model
 chat = ChatOpenAI(
     model_name="gpt-3.5-turbo",
-    temperature=0.1
+    temperature=0.1,
+    streaming=True,
+    callbacks=[StreamingStdOutCallbackHandler()],
 )
 ```
 
+1. Attribute Explanation
+
 - `temperate`: Determines the randomness of the model's output (range: 0 to 1).
+
+2. Enabling Streaming
+   - Set `streaming` to `True`.
+   - Use the callback `StreamingStdOutCallbackHandler`
 
 ### 2. Configure Prompt
 
@@ -187,3 +196,23 @@ chain.invoke(
 
 - Chain together components like `Prompt`, `Retriever`, `ChatModel`, `Tool`, and `OutputParser` using the `|` operator.
 - Use the `.invoke` method with a `dictionary` to provide actual values for the placeholders in the chain.
+
+2. Chaining Multiple Chains
+
+```python
+# Chain prompts, chat model, and output parser
+chef_chain = chef_prompt | chat
+veg_chain = veg_chef_prompt | chat
+
+final_chain = {"recipe": chef_chain} | veg_chain
+
+# Invoke chain with specified parameters
+final_chain.invoke(
+    {
+        "cuisine": "indian"
+    }
+)
+```
+
+- You can chain multiple chains together for combined functionality.
+- Ensure `contexts` are passed to the next chain by using `dictionary`.
