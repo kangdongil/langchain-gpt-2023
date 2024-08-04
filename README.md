@@ -201,3 +201,23 @@ p.parse(result.content)
 - `BaseOutputParser` is just an empty class with a parse method.
 - Place own parsing logic in the `parse` method
 - Ensure to convert the `ChatResult` instance into a string using the `.content` attribute before passing it to the `parse` method.
+
+### 4. Chain LangChain Components
+
+1. How to Create and Use a Chain
+
+```python
+# Chain template, chat model, and output parser
+chain = template | chat | CommaOutputParser()
+
+# Invoke chain with specified parameters
+chain.invoke(
+    {
+        "max_items": 5,
+        "question": "What are the pokemons?"
+    }
+)
+```
+
+- Chain together components like `Prompt`, `Retriever`, `ChatModel`, `Tool`, and `OutputParser` using the `|` operator.
+- Use the `.invoke` method with a dictionary(`{}`) to provide actual values for the placeholders in the chain.
