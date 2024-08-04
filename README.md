@@ -123,7 +123,8 @@ messages = [
 ]
 
 # Use the chat model to prdict responses based on the provided messages
-chat.predict_messages(messages)
+response = chat.predict_messages(messages)
+print(response)
 ```
 
 - `SystemMessage`: Provides rules or context for how the AI should behave
